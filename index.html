@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delicious Recipes – Home</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🍴 Delicious<span>Recipes</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="recipe1.html">Pasta</a></li>
+        <li><a href="recipe2.html">Biryani</a></li>
+        <li><a href="recipe3.html">Pancakes</a></li>
+        <li><a href="recipe4.html">Dal Tadka</a></li>
+        <li><a href="recipe5.html">Brownie</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner container">
+      <div class="hero-text">
+        <p class="hero-eyebrow">✦ Home-Cooked Goodness</p>
+        <h1 class="hero-title">
+          Cook <em>Something</em><br>
+          Extraordinary<br>Today.
+        </h1>
+        <p class="hero-desc">
+          Explore our curated collection of delicious recipes — from comforting weeknight
+          meals to impressive weekend feasts. Every dish is made simple and beautiful.
+        </p>
+        <div class="hero-actions">
+          <a href="recipe1.html" class="btn btn-primary">Browse Recipes</a>
+          <a href="about.html" class="btn btn-outline">About Us</a>
+        </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="images/hero.jpg" alt="Delicious food spread" />
+        <div class="hero-img-badge">
+          <span>5+</span>
+          Handpicked Recipes
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR (UI only) -->
+  <section class="search-section">
+    <div class="search-wrap">
+      <input type="text" placeholder="Search for a recipe, ingredient…" />
+      <span class="search-icon">🔍</span>
+    </div>
+  </section>
+
+  <!-- CATEGORY CHIPS -->
+  <section class="categories-section">
+    <div class="categories-grid">
+      <span class="cat-chip active">All Recipes</span>
+      <span class="cat-chip">🥦 Vegetarian</span>
+      <span class="cat-chip">🍗 Non-Vegetarian</span>
+      <span class="cat-chip">🍰 Desserts</span>
+      <span class="cat-chip">⚡ Quick &amp; Easy</span>
+      <span class="cat-chip">🌍 World Cuisine</span>
+    </div>
+  </section>
+
+  <!-- FEATURED RECIPES GRID -->
+  <section class="featured-section">
+    <div class="container">
+      <h2 class="section-title">Featured Recipes</h2>
+      <p class="section-subtitle">Made with love, served with joy.</p>
+      <div class="recipes-grid">
+
+        <article class="recipe-card">
+          <div class="recipe-card-img">
+            <img src="images/pasta.jpg" alt="Classic Pasta Carbonara" />
+            <span class="recipe-card-badge tag tag-nonveg">Non-Veg</span>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span>⏱ 30 min</span>
+              <span class="tag tag-easy">Easy</span>
+            </div>
+            <h3 class="recipe-card-title">Classic Pasta Carbonara</h3>
+            <p class="recipe-card-desc">A creamy Roman classic with crispy pancetta and silky egg sauce.</p>
+            <a href="recipe1.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">View Recipe →</a>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card-img">
+            <img src="images/biryani.jpg" alt="Chicken Biryani" />
+            <span class="recipe-card-badge tag tag-nonveg">Non-Veg</span>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span>⏱ 90 min</span>
+              <span class="tag tag-hard">Hard</span>
+            </div>
+            <h3 class="recipe-card-title">Hyderabadi Chicken Biryani</h3>
+            <p class="recipe-card-desc">Aromatic rice layered with spiced chicken, saffron and crispy onions.</p>
+            <a href="recipe2.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">View Recipe →</a>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card-img">
+            <img src="images/pancakes.jpg" alt="Fluffy Pancakes" />
+            <span class="recipe-card-badge tag tag-veg">Veg</span>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span>⏱ 20 min</span>
+              <span class="tag tag-easy">Easy</span>
+            </div>
+            <h3 class="recipe-card-title">Fluffy Buttermilk Pancakes</h3>
+            <p class="recipe-card-desc">Tall, golden, melt-in-your-mouth pancakes for a lazy weekend breakfast.</p>
+            <a href="recipe3.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">View Recipe →</a>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card-img">
+            <img src="images/daltadka.jpg" alt="Dal Tadka" />
+            <span class="recipe-card-badge tag tag-veg">Veg</span>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span>⏱ 45 min</span>
+              <span class="tag tag-easy">Easy</span>
+            </div>
+            <h3 class="recipe-card-title">Restaurant-Style Dal Tadka</h3>
+            <p class="recipe-card-desc">Smoky, buttery lentil curry tempered with garlic, cumin and red chillies.</p>
+            <a href="recipe4.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">View Recipe →</a>
+          </div>
+        </article>
+
+        <article class="recipe-card">
+          <div class="recipe-card-img">
+            <img src="images/brownie.jpg" alt="Fudgy Chocolate Brownie" />
+            <span class="recipe-card-badge tag tag-dessert">Dessert</span>
+          </div>
+          <div class="recipe-card-body">
+            <div class="recipe-card-meta">
+              <span>⏱ 40 min</span>
+              <span class="tag tag-medium">Medium</span>
+            </div>
+            <h3 class="recipe-card-title">Fudgy Chocolate Brownie</h3>
+            <p class="recipe-card-desc">Dense, glossy-topped brownies — crispy at the edges, gooey in the centre.</p>
+            <a href="recipe5.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">View Recipe →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">🍴 Delicious<span style="color:var(--clr-accent)">Recipes</span></div>
+        <p>A passion project celebrating the joy of home cooking.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Recipes</h4>
+        <a href="recipe1.html">Pasta Carbonara</a>
+        <a href="recipe2.html">Chicken Biryani</a>
+        <a href="recipe3.html">Fluffy Pancakes</a>
+        <a href="recipe4.html">Dal Tadka</a>
+        <a href="recipe5.html">Fudgy Brownie</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 DeliciousRecipes. Made with ❤️ by <strong style="color:#fff">Saksham</strong></span>
+      <span>Built with HTML &amp; CSS only.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
