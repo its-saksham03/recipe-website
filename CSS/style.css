@@ -1,0 +1,1079 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap');
+
+/* ============================================================
+   DELICIOUS RECIPES — ULTRA ANIMATED CSS
+   Features: Falling food, waves, parallax, shimmer, bounce,
+   ripple buttons, morphing cards, floating particles
+   ============================================================ */
+
+/* ---- Root Variables ---- */
+:root {
+  --bg: #fdf6ee;
+  --card: #ffffff;
+  --primary: #c0392b;
+  --primary-dark: #96281b;
+  --accent: #e67e22;
+  --accent2: #f39c12;
+  --text: #2c2c2c;
+  --muted: #7a6f65;
+  --border: #e8ddd3;
+  --footer-bg: #1e1410;
+  --footer-text: #c9b8a8;
+  --ff-h: 'Playfair Display', Georgia, serif;
+  --ff-b: 'Lato', sans-serif;
+  --r: 12px;
+  --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-b);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; border-radius: var(--r); }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ============================================================
+   FALLING FOOD PARTICLES
+   ============================================================ */
+.food-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.food-item {
+  position: absolute;
+  top: -80px;
+  font-size: 28px;
+  animation: freeFall linear infinite;
+  opacity: 0;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 20 food items, staggered positions & durations */
+.food-item:nth-child(1)  { left:  4%; font-size:22px; animation-duration:8s;  animation-delay:0s; }
+.food-item:nth-child(2)  { left:  9%; font-size:32px; animation-duration:11s; animation-delay:1.5s; }
+.food-item:nth-child(3)  { left: 15%; font-size:20px; animation-duration:7s;  animation-delay:3s; }
+.food-item:nth-child(4)  { left: 21%; font-size:30px; animation-duration:12s; animation-delay:0.8s; }
+.food-item:nth-child(5)  { left: 28%; font-size:24px; animation-duration:9s;  animation-delay:5s; }
+.food-item:nth-child(6)  { left: 35%; font-size:36px; animation-duration:10s; animation-delay:2s; }
+.food-item:nth-child(7)  { left: 42%; font-size:22px; animation-duration:8.5s;animation-delay:7s; }
+.food-item:nth-child(8)  { left: 48%; font-size:28px; animation-duration:13s; animation-delay:1s; }
+.food-item:nth-child(9)  { left: 55%; font-size:20px; animation-duration:7.5s;animation-delay:4s; }
+.food-item:nth-child(10) { left: 62%; font-size:34px; animation-duration:11s; animation-delay:6s; }
+.food-item:nth-child(11) { left: 68%; font-size:26px; animation-duration:9.5s;animation-delay:2.5s; }
+.food-item:nth-child(12) { left: 74%; font-size:22px; animation-duration:8s;  animation-delay:9s; }
+.food-item:nth-child(13) { left: 80%; font-size:30px; animation-duration:10s; animation-delay:0.5s; }
+.food-item:nth-child(14) { left: 86%; font-size:24px; animation-duration:12s; animation-delay:3.5s; }
+.food-item:nth-child(15) { left: 92%; font-size:20px; animation-duration:7s;  animation-delay:8s; }
+.food-item:nth-child(16) { left: 12%; font-size:26px; animation-duration:14s; animation-delay:4.5s; }
+.food-item:nth-child(17) { left: 47%; font-size:32px; animation-duration:9s;  animation-delay:11s; }
+.food-item:nth-child(18) { left: 58%; font-size:22px; animation-duration:10s; animation-delay:6.5s; }
+.food-item:nth-child(19) { left: 33%; font-size:28px; animation-duration:8s;  animation-delay:13s; }
+.food-item:nth-child(20) { left: 75%; font-size:24px; animation-duration:11s; animation-delay:2.8s; }
+
+@keyframes freeFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  5%   { opacity: 0.85; }
+  85%  { opacity: 0.7; }
+  95%  { opacity: 0; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ============================================================
+   WAVE SVG AT BOTTOM OF SECTIONS
+   ============================================================ */
+.wave-divider {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-divider svg {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveSlide 6s linear infinite;
+}
+@keyframes waveSlide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.wave-divider-top {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-divider-top svg {
+  position: absolute;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveSlide 8s linear infinite reverse;
+}
+
+/* Liquid wave (animated path) on hero */
+.hero-wave {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+}
+.hero-wave svg { width: 200%; animation: waveSlide 7s linear infinite; }
+
+/* ============================================================
+   DRIPPING SAUCE ANIMATION
+   ============================================================ */
+.drip-container {
+  position: relative;
+  overflow: visible;
+}
+.drip-container::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--primary), transparent);
+  border-radius: 0 0 4px 4px;
+  animation: drip 3s ease-in-out infinite;
+  transform-origin: top center;
+}
+@keyframes drip {
+  0%   { height: 0; opacity: 1; top: 100%; }
+  60%  { height: 40px; opacity: 1; }
+  80%  { height: 44px; opacity: 0.6; }
+  100% { height: 48px; opacity: 0; top: 105%; }
+}
+
+/* ============================================================
+   NAVBAR — animated underline + sticky shimmer
+   ============================================================ */
+.navbar {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(232,221,211,0.6);
+  animation: navSlideDown 0.6s var(--ease) both;
+}
+@keyframes navSlideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.nav-logo {
+  font-family: var(--ff-h);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  transition: transform 0.3s var(--ease);
+}
+.nav-logo:hover { transform: scale(1.06) rotate(-1deg); }
+.nav-logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links a {
+  padding: 7px 16px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s, background 0.25s;
+}
+/* Ripple on nav links */
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(192,57,43,0.15);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+.nav-links a:hover::before { width: 120px; height: 120px; opacity: 1; }
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary);
+  background: #fdecea;
+}
+/* Active underline wiggle */
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  animation: underlineWiggle 2s ease-in-out infinite;
+}
+@keyframes underlineWiggle {
+  0%,100% { width: 20px; }
+  50% { width: 32px; }
+}
+
+/* ============================================================
+   HERO SECTION — parallax + entrance animations
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, #fff4ed 0%, #fdf6ee 55%, #fde8df 100%);
+  padding: 90px 24px 80px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating blobs behind hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(230,126,34,0.13) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(192,57,43,0.09) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: blobFloat 10s ease-in-out infinite reverse;
+}
+@keyframes blobFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%     { transform: translate(20px,-15px) scale(1.05); }
+  66%     { transform: translate(-10px,10px) scale(0.97); }
+}
+
+.hero-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 14px;
+  animation: fadeInUp 0.5s 0.1s both;
+}
+/* Typewriter shimmer on eyebrow text */
+.hero-eyebrow::after {
+  content: ' ✦';
+  animation: sparkleLoop 2s ease-in-out infinite;
+}
+@keyframes sparkleLoop {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%     { opacity: 0.3; transform: scale(1.4); }
+}
+
+.hero-title {
+  font-family: var(--ff-h);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.12;
+  margin-bottom: 20px;
+  color: var(--text);
+  animation: fadeInUp 0.6s 0.2s both;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--primary);
+  position: relative;
+  display: inline-block;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+@keyframes titlePulse {
+  0%,100% { color: var(--primary); }
+  50%     { color: var(--accent); }
+}
+/* Underline swipe on hero title em */
+.hero-title em::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% 100%;
+  border-radius: 2px;
+  animation: gradientSlide 2s linear infinite;
+}
+@keyframes gradientSlide {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.hero-desc {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+  max-width: 420px;
+  animation: fadeInUp 0.6s 0.3s both;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeInUp 0.6s 0.4s both; }
+
+.hero-img-wrap {
+  position: relative;
+  animation: fadeInScale 0.8s 0.4s both;
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-img-wrap img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(192,57,43,0.2), 0 8px 24px rgba(0,0,0,0.1);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s ease;
+}
+.hero-img-wrap:hover img {
+  transform: scale(1.02) rotate(0.5deg);
+  box-shadow: 0 28px 80px rgba(192,57,43,0.28), 0 12px 32px rgba(0,0,0,0.13);
+}
+.hero-img-badge {
+  position: absolute;
+  bottom: -18px; left: -18px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--r);
+  padding: 16px 20px;
+  font-family: var(--ff-h);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(192,57,43,0.4);
+  line-height: 1.3;
+  animation: badgeBounce 4s ease-in-out infinite;
+}
+.hero-img-badge span { font-size: 1.7rem; display: block; }
+@keyframes badgeBounce {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50%     { transform: translateY(-8px) rotate(2deg); }
+}
+
+/* ============================================================
+   BUTTONS — ripple + spring
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-family: var(--ff-b);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+.btn:active::after { width: 200px; height: 200px; opacity: 0; transition: 0s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(192,57,43,0.4);
+}
+.btn-primary:active { transform: translateY(0) scale(0.97); }
+.btn-outline { background: transparent; border-color: var(--primary); color: var(--primary); }
+.btn-outline:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* Shimmer on btn-primary */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  animation: btnShimmer 3s ease-in-out infinite;
+}
+@keyframes btnShimmer {
+  0%   { left: -60%; }
+  60%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* ============================================================
+   SEARCH BAR — animated focus glow
+   ============================================================ */
+.search-section { padding: 40px 24px 0; position: relative; z-index: 1; }
+.search-wrap { max-width: 600px; margin: 0 auto; position: relative; }
+.search-wrap input {
+  width: 100%;
+  padding: 16px 60px 16px 24px;
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  font-family: var(--ff-b);
+  font-size: 1rem;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s var(--ease);
+}
+.search-wrap input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 5px rgba(192,57,43,0.12), 0 8px 24px rgba(0,0,0,0.08);
+  transform: scaleX(1.01);
+}
+.search-wrap input::placeholder { color: #bbb; }
+.search-icon {
+  position: absolute;
+  right: 18px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: var(--muted);
+  transition: transform 0.3s var(--ease), color 0.3s;
+}
+.search-wrap:focus-within .search-icon {
+  transform: translateY(-50%) scale(1.2);
+  color: var(--primary);
+}
+
+/* ============================================================
+   CATEGORY CHIPS — bounce hover
+   ============================================================ */
+.categories-section { padding: 48px 24px 0; position: relative; z-index: 1; }
+.categories-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cat-chip {
+  padding: 10px 22px;
+  border-radius: 50px;
+  border: 2px solid var(--border);
+  background: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  color: var(--muted);
+  position: relative;
+  overflow: hidden;
+}
+.cat-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  border-radius: 50px;
+  transform: scale(0);
+  transition: transform 0.35s var(--ease);
+  z-index: 0;
+}
+.cat-chip:hover, .cat-chip.active { border-color: var(--primary); color: #fff; }
+.cat-chip:hover::before, .cat-chip.active::before { transform: scale(1); }
+.cat-chip span, .cat-chip { position: relative; z-index: 1; }
+.cat-chip:hover { transform: translateY(-3px) scale(1.06); }
+.cat-chip:active { transform: translateY(1px) scale(0.97); }
+
+/* Animate chips in */
+.cat-chip:nth-child(1) { animation: popIn 0.4s 0.1s both; }
+.cat-chip:nth-child(2) { animation: popIn 0.4s 0.18s both; }
+.cat-chip:nth-child(3) { animation: popIn 0.4s 0.26s both; }
+.cat-chip:nth-child(4) { animation: popIn 0.4s 0.34s both; }
+.cat-chip:nth-child(5) { animation: popIn 0.4s 0.42s both; }
+.cat-chip:nth-child(6) { animation: popIn 0.4s 0.5s both; }
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.7) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================================================
+   RECIPE CARDS — 3D lift + shine sweep
+   ============================================================ */
+.featured-section { padding: 56px 24px; position: relative; z-index: 1; }
+.recipes-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.recipe-card {
+  background: var(--card);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+  position: relative;
+  animation: cardReveal 0.6s both;
+  transform-style: preserve-3d;
+}
+.recipe-card:nth-child(1) { animation-delay: 0.05s; }
+.recipe-card:nth-child(2) { animation-delay: 0.12s; }
+.recipe-card:nth-child(3) { animation-delay: 0.19s; }
+.recipe-card:nth-child(4) { animation-delay: 0.26s; }
+.recipe-card:nth-child(5) { animation-delay: 0.33s; }
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.recipe-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(192,57,43,0.16), 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* Shine sweep on card hover */
+.recipe-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+.recipe-card:hover::before { left: 140%; }
+
+.recipe-card-img { position: relative; overflow: hidden; }
+.recipe-card-img img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 0;
+  transition: transform 0.5s ease, filter 0.3s;
+}
+.recipe-card:hover .recipe-card-img img {
+  transform: scale(1.08);
+  filter: brightness(1.05) saturate(1.1);
+}
+/* Colour overlay on hover */
+.recipe-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(192,57,43,0.18) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.recipe-card:hover .recipe-card-img::after { opacity: 1; }
+
+.recipe-card-badge { position: absolute; top: 12px; right: 12px; z-index: 2; }
+.recipe-card-body { padding: 20px 22px 26px; }
+.recipe-card-meta {
+  display: flex; gap: 12px; margin-bottom: 10px;
+  font-size: 0.82rem; color: var(--muted);
+}
+.recipe-card-meta span { display: flex; align-items: center; gap: 4px; }
+.recipe-card-title {
+  font-family: var(--ff-h);
+  font-size: 1.22rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+  line-height: 1.3;
+  transition: color 0.3s;
+}
+.recipe-card:hover .recipe-card-title { color: var(--primary); }
+.recipe-card-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 18px; }
+
+/* ============================================================
+   TAGS
+   ============================================================ */
+.tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: transform 0.2s var(--ease);
+}
+.tag:hover { transform: scale(1.1); }
+.tag-easy    { background: #d5f5e3; color: #1e8449; }
+.tag-medium  { background: #fef9e7; color: #b7950b; }
+.tag-hard    { background: #fadbd8; color: #c0392b; }
+.tag-veg     { background: #d5f5e3; color: #1a7430; }
+.tag-nonveg  { background: #fadbd8; color: #a93226; }
+.tag-dessert { background: #f9ebea; color: #a04000; }
+
+/* ============================================================
+   SECTION HEADERS — animated underline
+   ============================================================ */
+.section-title {
+  font-family: var(--ff-h);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 4px;
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 0;
+  width: 60px; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 2px;
+  animation: lineGrow 0.8s 0.5s both;
+}
+@keyframes lineGrow {
+  from { width: 0; opacity: 0; }
+  to   { width: 60px; opacity: 1; }
+}
+.section-subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: 14px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+/* ============================================================
+   RECIPE PAGE — hero + content
+   ============================================================ */
+.recipe-hero {
+  background: linear-gradient(135deg, #fff4ed, #fdf6ee 70%, #fde8df);
+  padding: 48px 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+.recipe-hero-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+.recipe-breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
+.recipe-breadcrumb a {
+  color: var(--primary);
+  transition: text-decoration 0.2s;
+}
+.recipe-breadcrumb a:hover { text-decoration: underline; }
+.recipe-page-title {
+  font-family: var(--ff-h);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  animation: fadeInUp 0.6s both;
+}
+.recipe-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+
+/* Stat boxes with count-up feel */
+.recipe-stats {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
+}
+.stat-item {
+  flex: 1;
+  padding: 18px 12px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  transition: background 0.3s, transform 0.3s var(--ease);
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: #fff8f5; transform: translateY(-2px); }
+.stat-value {
+  font-family: var(--ff-h);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  animation: countIn 0.6s var(--ease) both;
+}
+@keyframes countIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.recipe-desc-text { color: var(--muted); font-size: 1rem; line-height: 1.75; }
+.recipe-main-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  transition: transform 0.5s var(--ease), box-shadow 0.4s;
+  animation: fadeInScale 0.8s 0.3s both;
+}
+.recipe-main-img:hover {
+  transform: scale(1.02) rotate(0.5deg);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.18);
+}
+
+/* ============================================================
+   INGREDIENTS & INSTRUCTIONS — staggered reveal
+   ============================================================ */
+.recipe-content {
+  padding: 48px 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 48px;
+}
+.ingredients-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  height: fit-content;
+  position: sticky;
+  top: 88px;
+  border: 1px solid rgba(232,221,211,0.5);
+  animation: slideInLeft 0.6s 0.2s both;
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-30px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.box-title {
+  font-family: var(--ff-h);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+}
+.ingredients-list li {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, padding-left 0.25s;
+  border-radius: 6px;
+}
+.ingredients-list li:hover { background: #fff8f5; padding-left: 8px; }
+.ingredients-list li::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease);
+}
+.ingredients-list li:hover::before { transform: scale(1.5); }
+.ingredients-list li:last-child { border-bottom: none; }
+
+.instructions-list { counter-reset: step; }
+.instructions-list li {
+  counter-increment: step;
+  padding: 22px 0 22px 60px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  font-size: 0.97rem;
+  line-height: 1.75;
+  transition: background 0.2s;
+  border-radius: 6px;
+}
+.instructions-list li:hover { background: #fffaf7; padding-left: 68px; }
+.instructions-list li:last-child { border-bottom: none; }
+.instructions-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 20px;
+  width: 38px; height: 38px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: var(--ff-h);
+  transition: transform 0.3s var(--ease), background 0.3s;
+  box-shadow: 0 4px 12px rgba(192,57,43,0.3);
+}
+.instructions-list li:hover::before {
+  transform: scale(1.2) rotate(5deg);
+  background: var(--accent);
+}
+
+/* ============================================================
+   FOOTER — with animated social + fade in
+   ============================================================ */
+footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 56px 24px 36px;
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle radial glow in footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 200px;
+  background: radial-gradient(circle, rgba(192,57,43,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.footer-brand .nav-logo { color: #fff; margin-bottom: 14px; font-size: 1.4rem; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+.footer-col h4 { font-family: var(--ff-h); font-size: 1.05rem; color: #fff; margin-bottom: 16px; }
+.footer-col a {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: var(--footer-text);
+  transition: color 0.25s, transform 0.25s var(--ease), padding-left 0.25s;
+}
+.footer-col a:hover { color: var(--accent); transform: translateX(4px); padding-left: 4px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+.footer-bottom a { color: var(--accent); }
+
+/* ============================================================
+   PAGE HEADER (About etc)
+   ============================================================ */
+.page-header {
+  background: linear-gradient(135deg, #fff4ed, #fdf6ee);
+  padding: 72px 24px;
+  text-align: center;
+}
+.page-section { padding: 56px 24px; max-width: 780px; margin: 0 auto; }
+.page-section p { color: var(--muted); margin-bottom: 18px; font-size: 1rem; }
+
+/* ============================================================
+   ANIMATED SCROLL REVEAL (class-based)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s ease, transform 0.7s var(--ease);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   PULSE RINGS on hero image
+   ============================================================ */
+.pulse-ring {
+  position: absolute;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulseRing 3s ease-out infinite;
+}
+.pulse-ring:nth-child(1) { animation-delay: 0s; }
+.pulse-ring:nth-child(2) { animation-delay: 1s; }
+.pulse-ring:nth-child(3) { animation-delay: 2s; }
+@keyframes pulseRing {
+  0%   { width: 60px; height: 60px; opacity: 0.7; top: 10px; left: 10px; }
+  100% { width: 180px; height: 180px; opacity: 0; top: -50px; left: -50px; }
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% 100%;
+  z-index: 999;
+  width: 0%;
+  transition: width 0.1s;
+  animation: gradientSlide 2s linear infinite;
+}
+
+/* ============================================================
+   FLOATING "back to top" button
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 48px; height: 48px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(192,57,43,0.35);
+  z-index: 200;
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  animation: floatBtn 3s ease-in-out infinite;
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-4px) scale(1.1); }
+@keyframes floatBtn {
+  0%,100% { box-shadow: 0 8px 24px rgba(192,57,43,0.35); }
+  50%      { box-shadow: 0 14px 36px rgba(192,57,43,0.5); }
+}
+
+/* ============================================================
+   RESPONSIVE (Media Queries)
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero-inner, .recipe-hero-inner, .recipe-content, .footer-inner { grid-template-columns: 1fr; }
+  .hero-img-wrap { display: none; }
+  .recipe-main-img { height: 280px; }
+  .recipe-content { padding: 32px 16px; }
+  .ingredients-box { position: static; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links a { padding: 5px 9px; font-size: 0.78rem; }
+  .nav-logo { font-size: 1.1rem; }
+  .recipes-grid { grid-template-columns: 1fr; }
+  .recipe-stats { flex-wrap: wrap; }
+  .stat-item { flex: 1 0 45%; border-right: none; border-bottom: 1px solid var(--border); }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .hero { padding: 52px 16px 44px; }
+  .food-item { font-size: 18px !important; }
+}
+
+/* ============================================================
+   @keyframes — shared utility
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ============================================================
+   HOVER TILT (JS-driven, class hook)
+   ============================================================ */
+.tilt {
+  transition: transform 0.15s ease;
+  transform-style: preserve-3d;
+}
+
+/* ============================================================
+   DARK MODE SUPPORT
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1208;
+    --card: #261d12;
+    --text: #f0e8df;
+    --muted: #a89b90;
+    --border: #3d3028;
+    --footer-bg: #0e0a05;
+    --footer-text: #8a7b70;
+  }
+  .navbar { background: rgba(22,15,8,0.92); border-bottom-color: rgba(61,48,40,0.6); }
+  .search-wrap input { background: #261d12; color: var(--text); border-color: var(--border); }
+  .cat-chip { background: #261d12; }
+  .ingredients-box { background: var(--card); }
+  .recipe-stats { background: var(--card); }
+  .stat-item:hover { background: #2e2318; }
+  .ingredients-list li:hover { background: #2e2318; }
+  .instructions-list li:hover { background: #2a1f14; }
+  .recipe-card { background: var(--card); }
+}
